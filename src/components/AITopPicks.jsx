@@ -1,7 +1,0 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { stocks, formatPrice } from '../data/mockData';
-import { PriceChange, SectionHeading, SignalBadge, StockMark } from './Shared';
-
-export default function AITopPicks({ onSelect, onRanking }) {
-  return <section className="section ranking-section container" id="ranking" aria-labelledby="ranking-heading"><SectionHeading eyebrow="AI TOP PICKS" title="AI가 주목하는 종목" description="20거래일 기준 AI Score · 4개 샘플 종목" id="ranking-heading" action={<button className="text-button" onClick={onRanking}>전체 AI Ranking 보기<ArrowRight size={16}/></button>}/><div className="picks-grid">{stocks.map((stock, i) => <button className="pick-card" key={stock.id} onClick={() => onSelect(stock)} aria-label={`${stock.name}, 20일 AI Score ${stock.rankingScore}점, 분석 자세히 보기`}><div className="pick-top"><span className="rank-number">0{i + 1}</span><ArrowUpRight size={17}/></div><div className="pick-identity"><StockMark stock={stock} small/><div><h3>{stock.name}</h3><span className="ticker">{stock.ticker}</span></div></div><div className="pick-price"><strong>{formatPrice(stock.price)}</strong><PriceChange value={stock.change} compact/></div><div className="pick-divider"/><div className="pick-score"><span>AI Score</span><strong>{stock.rankingScore}<small>/ 100</small></strong></div><div className="pick-score-track"><span style={{width: `${stock.rankingScore}%`}}/></div><div className="pick-bottom"><SignalBadge signal={stock.rankingSignal}/><span>20일 기준</span></div></button>)}</div></section>;
-}
